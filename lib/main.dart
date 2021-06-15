@@ -17,7 +17,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       navigatorKey: getIt<NavigationService>().navigatorKey,
       title: 'Medium Flutter UI',
-      initialRoute: '/home',
+      initialRoute: '/editor',
       onGenerateRoute: RouteGenerator.generateRoute,
       debugShowCheckedModeBanner: false,
       darkTheme: ThemeData(

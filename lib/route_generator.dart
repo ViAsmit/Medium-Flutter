@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:medium_flutter/src/screens/editorScreen.dart';
 import 'package:medium_flutter/src/screens/landingScreen.dart';
 import 'package:medium_flutter/src/screens/profileScreen.dart';
 import 'package:medium_flutter/src/screens/signin.dart';
@@ -21,6 +22,8 @@ class RouteGenerator {
         return MaterialPageRoute(builder: (_) => LandingScreen());
       case '/profile':
         return MaterialPageRoute(builder: (_) => ProfileScreen());
+      case '/editor':
+        return MaterialPageRoute(builder: (_) => EditorScreen());
       default:
         return _errorRoute();
     }

@@ -76,6 +76,13 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
+  flutter_mce:
+    dependency: "direct main"
+    description:
+      path: "../FlutterMCE"
+      relative: true
+    source: path
+    version: "0.0.1"
   flutter_test:
     dependency: "direct dev"
     description: flutter
@@ -92,7 +99,7 @@ packages:
       name: font_awesome_flutter
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "9.1.0"
+    version: "8.12.0"
   get_it:
     dependency: "direct main"
     description:
@@ -204,7 +211,7 @@ packages:
       name: provider
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "5.0.0"
+    version: "4.3.3"
   shared_preferences:
     dependency: "direct main"
     description:
