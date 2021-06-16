@@ -3,6 +3,7 @@ import 'package:medium_flutter/src/screens/editorScreen.dart';
 import 'package:medium_flutter/src/screens/landingScreen.dart';
 import 'package:medium_flutter/src/screens/profileScreen.dart';
 import 'package:medium_flutter/src/screens/registerEmailScreen.dart';
+import 'package:medium_flutter/src/screens/settingsScreen.dart';
 import 'package:medium_flutter/src/screens/signEmailScreen.dart';
 import 'package:medium_flutter/src/screens/signin.dart';
 import 'package:medium_flutter/src/screens/signup.dart';
@@ -28,6 +29,8 @@ class RouteGenerator {
         return MaterialPageRoute(builder: (_) => ProfileScreen());
       case '/editor':
         return MaterialPageRoute(builder: (_) => EditorScreen());
+      case '/settings':
+        return MaterialPageRoute(builder: (_) => SettingsScreen());
       default:
         return _errorRoute();
     }

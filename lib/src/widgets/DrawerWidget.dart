@@ -106,7 +106,12 @@ class DrawerWidget extends StatelessWidget {
                 height: 80.0,
                 width: 100.0,
               ),
-              Text('Settings'),
+              GestureDetector(
+                onTap: () {
+                  Navigator.of(context).pushNamed('/settings');
+                },
+                child: Text('Settings'),
+              ),
               Text('Help')
             ],
           )

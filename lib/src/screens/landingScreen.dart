@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:medium_flutter/provider/base_view.dart';
 import 'package:medium_flutter/src/widgets/DrawerWidget.dart';
+import 'package:medium_flutter/view/blogs_viewmodel.dart';
 
 class LandingScreen extends StatefulWidget {
   @override
@@ -11,38 +12,40 @@ class _LandingScreenState extends State<LandingScreen> {
   final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      key: _scaffoldKey,
-      drawer: DrawerWidget(),
-      appBar: AppBar(
-        brightness: Brightness.dark,
-        backgroundColor: Theme.of(context).primaryColor,
-        foregroundColor: Theme.of(context).backgroundColor,
-        title: Text('Home'),
-        leading: IconButton(
-          icon: Icon(Icons.menu),
-          onPressed: () {
-            _scaffoldKey.currentState.openDrawer();
-          },
-        ),
-        actions: [
-          Icon(Icons.notifications_none_outlined),
-          SizedBox(width: 25.0),
-          Icon(Icons.search),
-          SizedBox(width: 10.0),
-        ],
-      ),
-      body: SingleChildScrollView(
-        padding: EdgeInsets.symmetric(horizontal: 15.0, vertical: 20.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            BlogCard(),
-            BlogCard(),
-            BlogCard(),
-            BlogCard(),
-            BlogCard(),
+    return BaseView<BlogsViewModel>(
+      builder: (ctx, model, build) => Scaffold(
+        key: _scaffoldKey,
+        drawer: DrawerWidget(),
+        appBar: AppBar(
+          brightness: Brightness.dark,
+          backgroundColor: Theme.of(context).primaryColor,
+          foregroundColor: Theme.of(context).backgroundColor,
+          title: Text('Home'),
+          leading: IconButton(
+            icon: Icon(Icons.menu),
+            onPressed: () {
+              _scaffoldKey.currentState.openDrawer();
+            },
+          ),
+          actions: [
+            Icon(Icons.notifications_none_outlined),
+            SizedBox(width: 25.0),
+            Icon(Icons.search),
+            SizedBox(width: 10.0),
           ],
+        ),
+        body: SingleChildScrollView(
+          padding: EdgeInsets.symmetric(horizontal: 15.0, vertical: 20.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              BlogCard(),
+              BlogCard(),
+              BlogCard(),
+              BlogCard(),
+              BlogCard(),
+            ],
+          ),
         ),
       ),
     );

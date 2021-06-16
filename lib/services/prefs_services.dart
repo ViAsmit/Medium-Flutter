@@ -5,7 +5,9 @@ class Prefs {
   final String _authTokenStorageKey = 'AUTH_TOKEN';
   Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
   static String _authToken;
+
   getToken() => _authToken;
+
   Future<String> getAuthToken() async {
     final SharedPreferences prefs = await _prefs;
 
@@ -22,5 +24,12 @@ class Prefs {
     final SharedPreferences prefs = await _prefs;
     //print('called: $_userID');
     prefs.setString(_userIDStorageKey, uID);
+  }
+
+  Future<void> deleteTokens() async {
+    final SharedPreferences prefs = await _prefs;
+    prefs.remove(_authTokenStorageKey);
+    prefs.remove(_userIDStorageKey);
+    _authToken = null;
   }
 }

@@ -31,7 +31,7 @@ class LoginViewModel extends BaseModel {
       _prefs.setUID(response.data['token'].toString());
 
       print('success');
-      navigationService.navigateTo('/home', withreplacement: true);
+      navigationService.navigateTo('/', withreplacement: true);
     } else {
       setState(ViewState.Idle);
       AppConstant.showFailToast(context, response.errorMessage);
@@ -54,7 +54,7 @@ class LoginViewModel extends BaseModel {
       _prefs.setAuthToken(response.data['token']);
       _prefs.setUID(response.data['token'].toString());
       print('success');
-      navigationService.navigateTo('/home', withreplacement: true);
+      navigationService.navigateTo('/', withreplacement: true);
     } else {
       setState(ViewState.Idle);
       AppConstant.showFailToast(context, response.errorMessage);
