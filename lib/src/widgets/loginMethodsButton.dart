@@ -4,7 +4,8 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 class LoginMethodsButton extends StatelessWidget {
   final String type;
   final IconData icon;
-  LoginMethodsButton({this.type, this.icon});
+  final Function handleTap;
+  LoginMethodsButton(this.handleTap, {this.type, this.icon});
 
   @override
   Widget build(BuildContext context) {
@@ -21,9 +22,7 @@ class LoginMethodsButton extends StatelessWidget {
             Text(type),
           ],
         ),
-        onPressed: () {
-          print('y');
-        },
+        onPressed: handleTap,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(25.0),
           side: BorderSide(color: Theme.of(context).primaryColor),

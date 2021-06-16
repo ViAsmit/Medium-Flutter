@@ -10,7 +10,7 @@ import 'dart:convert';
 
 abstract class BaseApi {
   final String _baseUrl =
-      'doorstepdelhi-test.herokuapp.com'; //'36eb00ef8692.ngrok.io'
+      'medium-server.herokuapp.com'; //'36eb00ef8692.ngrok.io'
   final String _authToken = Prefs().getToken();
 
   Future<ApiResponse> signUp(Map data, String endpoint) async {

@@ -3,21 +3,28 @@ import 'package:medium_flutter/provider/getit.dart';
 import 'package:medium_flutter/route_generator.dart';
 import 'package:medium_flutter/services/navigation_service.dart';
 import 'package:flutter/material.dart';
+import 'package:medium_flutter/services/prefs_services.dart';
 
-void main() {
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   setupLocator();
-  runApp(MyApp());
+  String token = await Prefs().getAuthToken();
+  print("=====");
+  print(token);
+  print("=====");
+  runApp(MyApp(token: token));
 }
 
 class MyApp extends StatelessWidget {
+  final String token;
+  MyApp({this.token = ""});
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       navigatorKey: getIt<NavigationService>().navigatorKey,
       title: 'Medium Flutter UI',
-      initialRoute: '/editor',
+      initialRoute: (token == "") ? '/signin' : "/",
       onGenerateRoute: RouteGenerator.generateRoute,
       debugShowCheckedModeBanner: false,
       darkTheme: ThemeData(

@@ -34,24 +34,42 @@ class _SigninScreenState extends State<SigninScreen> {
                     .merge(TextStyle(fontSize: 50.0))),
             SizedBox(height: 20.0),
             LoginMethodsButton(
+              () {
+                print('yyy');
+              },
               type: "Sign in with Google",
               icon: FontAwesomeIcons.google,
             ),
             LoginMethodsButton(
+              () {
+                print('yyy');
+              },
               type: "Sign in with Facebook",
               icon: FontAwesomeIcons.facebookF,
             ),
             LoginMethodsButton(
-                type: "Sign in with Email", icon: FontAwesomeIcons.envelope),
+              () {
+                Navigator.of(context).pushNamed('/sign-email');
+              },
+              type: "Sign in with Email",
+              icon: FontAwesomeIcons.envelope,
+            ),
             SizedBox(height: 10.0),
-            RichText(
-              text: TextSpan(
-                style: Theme.of(context).textTheme.body1,
-                children: [
-                  TextSpan(text: "Don't have an account? "),
-                  TextSpan(
-                      text: "Sign up.", style: TextStyle(color: Colors.green))
-                ],
+            GestureDetector(
+              onTap: () {
+                Navigator.of(context).pushNamed('/signup');
+              },
+              child: RichText(
+                text: TextSpan(
+                  style: Theme.of(context).textTheme.body1,
+                  children: [
+                    TextSpan(text: "Don't have an account? "),
+                    TextSpan(
+                      text: "Sign up.",
+                      style: TextStyle(color: Colors.green),
+                    )
+                  ],
+                ),
               ),
             ),
           ],

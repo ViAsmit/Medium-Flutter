@@ -34,26 +34,40 @@ class _SignupScreenState extends State<SignupScreen> {
                     .merge(TextStyle(fontSize: 50.0))),
             SizedBox(height: 20.0),
             LoginMethodsButton(
+              () {
+                print('yyy');
+              },
               type: "Sign up with Google",
               icon: FontAwesomeIcons.google,
             ),
             LoginMethodsButton(
+              () {
+                print('yyy');
+              },
               type: "Sign up with Facebook",
               icon: FontAwesomeIcons.facebookF,
             ),
             LoginMethodsButton(
+              () {
+                Navigator.of(context).pushNamed('/reg-email');
+              },
               type: "Sign up with Email",
               icon: FontAwesomeIcons.envelope,
             ),
             SizedBox(height: 10.0),
-            RichText(
-              text: TextSpan(
-                style: Theme.of(context).textTheme.body1,
-                children: [
-                  TextSpan(text: "Already have an account? "),
-                  TextSpan(
-                      text: "Sign in.", style: TextStyle(color: Colors.green))
-                ],
+            GestureDetector(
+              onTap: () {
+                Navigator.of(context).pushNamed('/signin');
+              },
+              child: RichText(
+                text: TextSpan(
+                  style: Theme.of(context).textTheme.body1,
+                  children: [
+                    TextSpan(text: "Already have an account? "),
+                    TextSpan(
+                        text: "Sign in.", style: TextStyle(color: Colors.green))
+                  ],
+                ),
               ),
             ),
             SizedBox(height: 150.0),

@@ -7,7 +7,7 @@ class ApiService extends BaseApi {
   Future<ApiResponse> signupMethod(data) async {
     ApiResponse response;
     try {
-      response = await signUp(data, eSignUp);
+      response = await signUp(data, '/users/register/');
     } catch (e) {
       response = ApiResponse(error: true, errorMessage: e.toString());
     }
@@ -18,7 +18,7 @@ class ApiService extends BaseApi {
   Future<ApiResponse> loginMethod(data) async {
     ApiResponse response;
     try {
-      response = await signUp(data, eLogIn);
+      response = await signUp(data, "users/login");
       print('no error');
     } catch (e) {
       response = ApiResponse(error: true, errorMessage: e.toString());
