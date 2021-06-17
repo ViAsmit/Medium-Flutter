@@ -27,7 +27,7 @@ class ApiService extends BaseApi {
     return response;
   }
 
-  Future<ApiResponse> getWebsiteMethod({String endpoint}) async {
+  Future<ApiResponse> getArticlesMethod({String endpoint}) async {
     ApiResponse response;
     try {
       response = await getRequest(endpoint: endpoint);
@@ -35,7 +35,6 @@ class ApiService extends BaseApi {
     } catch (e) {
       response = ApiResponse(error: true, errorMessage: e.toString());
     }
-
     return response;
   }
 

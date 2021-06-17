@@ -76,6 +76,7 @@ abstract class BaseApi {
       {String endpoint, Map<String, String> query}) async {
     final uri = Uri.https(_baseUrl, endpoint, query);
     print(uri);
+    print(_authToken);
     return processResponse(await http.get(
       uri,
       headers: {

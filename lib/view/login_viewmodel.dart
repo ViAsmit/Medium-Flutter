@@ -28,7 +28,7 @@ class LoginViewModel extends BaseModel {
       print(response.data);
       print('=====');
       _prefs.setAuthToken(response.data['token']);
-      _prefs.setUID(response.data['token'].toString());
+      _prefs.setUID(response.data['uid'].toString());
 
       print('success');
       navigationService.navigateTo('/', withreplacement: true);
@@ -52,7 +52,7 @@ class LoginViewModel extends BaseModel {
       print('=====');
       setState(ViewState.Idle);
       _prefs.setAuthToken(response.data['token']);
-      _prefs.setUID(response.data['token'].toString());
+      _prefs.setUID(response.data['uid'].toString());
       print('success');
       navigationService.navigateTo('/', withreplacement: true);
     } else {

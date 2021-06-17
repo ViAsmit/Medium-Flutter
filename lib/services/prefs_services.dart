@@ -10,19 +10,20 @@ class Prefs {
 
   Future<String> getAuthToken() async {
     final SharedPreferences prefs = await _prefs;
+    _authToken = prefs.getString(_authTokenStorageKey) ?? '';
 
-    return prefs.getString(_authTokenStorageKey) ?? '';
+    return _authToken;
   }
 
   Future<void> setAuthToken(String token) async {
     final SharedPreferences prefs = await _prefs;
+    print('called: $token');
     _authToken = token;
     prefs.setString(_authTokenStorageKey, token);
   }
 
   Future<void> setUID(String uID) async {
     final SharedPreferences prefs = await _prefs;
-    //print('called: $_userID');
     prefs.setString(_userIDStorageKey, uID);
   }
 

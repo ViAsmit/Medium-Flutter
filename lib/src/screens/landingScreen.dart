@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:medium_flutter/provider/base_view.dart';
+import 'package:medium_flutter/src/models/article.dart';
 import 'package:medium_flutter/src/widgets/DrawerWidget.dart';
 import 'package:medium_flutter/view/blogs_viewmodel.dart';
 
@@ -13,6 +14,7 @@ class _LandingScreenState extends State<LandingScreen> {
   @override
   Widget build(BuildContext context) {
     return BaseView<BlogsViewModel>(
+      onModelReady: (model) => model.getArticles(context),
       builder: (ctx, model, build) => Scaffold(
         key: _scaffoldKey,
         drawer: DrawerWidget(),
@@ -34,17 +36,15 @@ class _LandingScreenState extends State<LandingScreen> {
             SizedBox(width: 10.0),
           ],
         ),
-        body: SingleChildScrollView(
+        body: Container(
           padding: EdgeInsets.symmetric(horizontal: 15.0, vertical: 20.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              BlogCard(),
-              BlogCard(),
-              BlogCard(),
-              BlogCard(),
-              BlogCard(),
-            ],
+          child: ListView.builder(
+            itemCount: model.articles.length,
+            itemBuilder: (context, idx) {
+              return BlogCard(
+                article: model.articles[idx],
+              );
+            },
           ),
         ),
       ),
@@ -53,6 +53,8 @@ class _LandingScreenState extends State<LandingScreen> {
 }
 
 class BlogCard extends StatefulWidget {
+  final Article article;
+  BlogCard({this.article});
   @override
   _BlogCardState createState() => _BlogCardState();
 }
