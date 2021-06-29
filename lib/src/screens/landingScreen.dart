@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:medium_flutter/provider/base_view.dart';
+import 'package:medium_flutter/services/navigation_service.dart';
 import 'package:medium_flutter/src/models/article.dart';
 import 'package:medium_flutter/src/widgets/DrawerWidget.dart';
 import 'package:medium_flutter/view/blogs_viewmodel.dart';
@@ -77,28 +78,50 @@ class _BlogCardState extends State<BlogCard> {
               TextStyle(color: Theme.of(context).hintColor.withOpacity(0.5))),
         ),
         SizedBox(height: 20.0),
-        Row(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Expanded(
-              child: Text(
-                'An Introduction to Optical Character Recognition for Beginners',
-                style: Theme.of(context).textTheme.display1,
-                softWrap: true,
+        GestureDetector(
+          onTap: () {
+            Navigator.of(context)
+                .pushNamed("/article", arguments: widget.article);
+          },
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Expanded(
+                child: Container(
+                  height: 100,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        widget.article.title,
+                        style: Theme.of(context).textTheme.display1,
+                        softWrap: true,
+                      ),
+                      SizedBox(height: 5.0),
+                      Text(
+                        widget.article.text,
+                        style: Theme.of(context).textTheme.subtitle1,
+                        softWrap: true,
+                      ),
+                    ],
+                  ),
+                ),
               ),
-            ),
-            Image.asset('assets/images/logo.png', height: 100.0, width: 100.0),
-          ],
+              Image.asset('assets/images/logo.png',
+                  height: 100.0, width: 100.0),
+            ],
+          ),
         ),
         SizedBox(height: 10.0),
         Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  'Asmit Vimal in Towards Data Science',
+                  'Asmit in Towards Data Science',
                   style: Theme.of(context).textTheme.subtitle,
                 ),
                 Text(

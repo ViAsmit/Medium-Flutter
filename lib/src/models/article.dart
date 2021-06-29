@@ -59,6 +59,7 @@ class Article {
 
 class Author {
   Author({
+    this.name,
     this.profileImage,
     this.followers,
     this.following,
@@ -73,6 +74,7 @@ class Author {
   List<String> followers;
   List<String> following;
   String id;
+  String name;
   String email;
   String salt;
   String password;
@@ -83,6 +85,7 @@ class Author {
         followers: List<String>.from(json["followers"].map((x) => x)),
         following: List<String>.from(json["following"].map((x) => x)),
         id: json["_id"],
+        name: json["name"],
         email: json["email"],
         salt: json["salt"],
         password: json["password"],
@@ -94,6 +97,7 @@ class Author {
         "followers": List<dynamic>.from(followers.map((x) => x)),
         "following": List<dynamic>.from(following.map((x) => x)),
         "_id": id,
+        "name": name,
         "email": email,
         "salt": salt,
         "password": password,

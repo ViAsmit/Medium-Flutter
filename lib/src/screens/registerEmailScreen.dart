@@ -37,6 +37,29 @@ class _RegisterEmailScreenState extends State<RegisterEmailScreen> {
                 textAlign: TextAlign.center,
               ),
               SizedBox(height: 40.0),
+              Text('Your Username'),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 40.0),
+                child: TextField(
+                  controller: model.nameCtl,
+                  textAlign: TextAlign.center,
+                  cursorHeight: 30.0,
+                  style: Theme.of(context).textTheme.bodyText1,
+                  cursorColor: Theme.of(context).primaryColor,
+                  keyboardType: TextInputType.emailAddress,
+                  decoration: InputDecoration(
+                    enabledBorder: UnderlineInputBorder(
+                      borderSide: BorderSide(
+                          color: Theme.of(context).primaryColor, width: 1.5),
+                    ),
+                    focusedBorder: UnderlineInputBorder(
+                      borderSide: BorderSide(
+                          color: Theme.of(context).primaryColor, width: 1.5),
+                    ),
+                  ),
+                ),
+              ),
+              SizedBox(height: 40.0),
               Text('Your Email'),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 40.0),

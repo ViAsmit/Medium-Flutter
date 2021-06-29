@@ -8,6 +8,7 @@ import 'package:medium_flutter/services/prefs_services.dart';
 class LoginViewModel extends BaseModel {
   ApiService _apiService = ApiService();
   Prefs _prefs = Prefs();
+  TextEditingController nameCtl = TextEditingController();
   TextEditingController emailCtl = TextEditingController();
   TextEditingController passCtl = TextEditingController();
   TextEditingController confirmCtl = TextEditingController();
@@ -15,6 +16,7 @@ class LoginViewModel extends BaseModel {
   void signup(BuildContext context) async {
     setState(ViewState.Busy);
     final data = {
+      "name": nameCtl.text,
       "email": emailCtl.text,
       "password": passCtl.text,
       "password_confirm": confirmCtl.text,
