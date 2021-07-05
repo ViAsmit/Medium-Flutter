@@ -9,15 +9,15 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 
 abstract class BaseApi {
-  final String _baseUrl =
-      'medium-server.herokuapp.com'; //'36eb00ef8692.ngrok.io'
+  // final String _baseUrl = 'medium-server.herokuapp.com';
+  final String _baseUrl = '192.168.1.9:5000';
   final String _authToken = Prefs().getToken();
 
   Future<ApiResponse> signUp(Map data, String endpoint) async {
     var responseBody = json.decode('{"data": "", "status": "NOK"}');
 
     try {
-      final uri = Uri.https(_baseUrl, endpoint);
+      final uri = Uri.http(_baseUrl, endpoint);
       print(uri);
       final response = await http.post(uri, body: data);
       print(response.statusCode);
@@ -74,13 +74,13 @@ abstract class BaseApi {
   //GET
   Future<ApiResponse> getRequest(
       {String endpoint, Map<String, String> query}) async {
-    final uri = Uri.https(_baseUrl, endpoint, query);
+    final uri = Uri.http(_baseUrl, endpoint, query);
     print(uri);
     print(_authToken);
     return processResponse(await http.get(
       uri,
       headers: {
-        HttpHeaders.authorizationHeader: 'Token $_authToken',
+        HttpHeaders.authorizationHeader: 'Bearer $_authToken',
       },
     ));
   }
@@ -88,7 +88,7 @@ abstract class BaseApi {
   //GET Without Auth
   Future<ApiResponse> getWithoutAuthRequest(
       {String endpoint, Map<String, String> query}) async {
-    final uri = Uri.https(_baseUrl, endpoint, query);
+    final uri = Uri.http(_baseUrl, endpoint, query);
     print(uri);
     return processResponse(await http.get(
       uri,
@@ -98,12 +98,16 @@ abstract class BaseApi {
   //POST
   Future<ApiResponse> postRequest(
       String endpoint, Map<String, dynamic> data) async {
-    final uri = Uri.https(_baseUrl, endpoint);
-    return processResponse(await http.post(uri,
-        headers: {
-          HttpHeaders.authorizationHeader: 'Token $_authToken',
-        },
-        body: data));
+    final uri = Uri.http(_baseUrl, endpoint);
+    print(uri);
+    print(_authToken);
+    return processResponse(
+      await http.post(uri,
+          headers: {
+            HttpHeaders.authorizationHeader: 'Bearer $_authToken',
+          },
+          body: data),
+    );
   }
 
   // PUT

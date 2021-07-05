@@ -1,9 +1,22 @@
 // import 'package:medium_flutter/config/ui_icons.dart';
 // import 'package:medium_flutter/src/models/user.dart';
-import 'package:flutter/material.dart';
+import 'dart:developer';
 
-class DrawerWidget extends StatelessWidget {
-  // User _user = new User.init().getCurrentUser();
+import 'package:flutter/material.dart';
+import 'package:medium_flutter/services/prefs_services.dart';
+
+class DrawerWidget extends StatefulWidget {
+  @override
+  _DrawerWidgetState createState() => _DrawerWidgetState();
+}
+
+class _DrawerWidgetState extends State<DrawerWidget> {
+  @override
+  void initState() {
+    super.initState();
+    print(Prefs().getUid());
+  }
+
   @override
   Widget build(BuildContext context) {
     return Drawer(
@@ -11,7 +24,8 @@ class DrawerWidget extends StatelessWidget {
         children: <Widget>[
           GestureDetector(
             onTap: () {
-              // Navigator.of(context).pushNamed('/Tabs', arguments: 1);
+              Navigator.of(context)
+                  .pushNamed('/profile', arguments: Prefs().getUid());
             },
             child: UserAccountsDrawerHeader(
               decoration: BoxDecoration(),
@@ -78,6 +92,9 @@ class DrawerWidget extends StatelessWidget {
             ),
           ),
           ListTile(
+            onTap: () {
+              Navigator.of(context).pushNamed("/editor");
+            },
             title: Text(
               "New Story",
               style: Theme.of(context).textTheme.caption,

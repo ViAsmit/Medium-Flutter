@@ -5,14 +5,23 @@ class Prefs {
   final String _authTokenStorageKey = 'AUTH_TOKEN';
   Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
   static String _authToken;
+  static String _uid;
 
   getToken() => _authToken;
+  getUid() => _uid;
 
   Future<String> getAuthToken() async {
     final SharedPreferences prefs = await _prefs;
     _authToken = prefs.getString(_authTokenStorageKey) ?? '';
 
     return _authToken;
+  }
+
+  Future<String> getAuthUID() async {
+    final SharedPreferences prefs = await _prefs;
+    _uid = prefs.getString(_userIDStorageKey) ?? '';
+
+    return _uid;
   }
 
   Future<void> setAuthToken(String token) async {
@@ -24,6 +33,7 @@ class Prefs {
 
   Future<void> setUID(String uID) async {
     final SharedPreferences prefs = await _prefs;
+    _uid = uID;
     prefs.setString(_userIDStorageKey, uID);
   }
 

@@ -29,9 +29,9 @@ class RouteGenerator {
       case '/reg-email':
         return MaterialPageRoute(builder: (_) => RegisterEmailScreen());
       case '/profile':
-        return MaterialPageRoute(builder: (_) => ProfileScreen());
+        return MaterialPageRoute(builder: (_) => ProfileScreen(id: args));
       case '/editor':
-        return MaterialPageRoute(builder: (_) => EditorScreen());
+        return MaterialPageRoute(builder: (_) => TextEditor());
       case '/settings':
         return MaterialPageRoute(builder: (_) => SettingsScreen());
       default:

@@ -4,14 +4,18 @@ import 'package:medium_flutter/route_generator.dart';
 import 'package:medium_flutter/services/navigation_service.dart';
 import 'package:flutter/material.dart';
 import 'package:medium_flutter/services/prefs_services.dart';
+import 'package:firebase_core/firebase_core.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   setupLocator();
   String token = await Prefs().getAuthToken();
   print("=====");
   print(token);
   print("=====");
+  await Prefs().getAuthToken();
+  await Prefs().getAuthUID();
   runApp(MyApp(token: token));
 }
 

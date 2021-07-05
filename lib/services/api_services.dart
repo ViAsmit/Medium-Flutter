@@ -38,7 +38,7 @@ class ApiService extends BaseApi {
     return response;
   }
 
-  Future<ApiResponse> postWebsiteMethod(
+  Future<ApiResponse> postArticleMethod(
       {String endpoint, Map<String, dynamic> data}) async {
     ApiResponse response;
     try {
@@ -51,29 +51,28 @@ class ApiService extends BaseApi {
     return response;
   }
 
-  Future<ApiResponse> patchWebsiteMethod(
+  Future<ApiResponse> getProfileMethod({String endpoint, String id}) async {
+    ApiResponse response;
+    try {
+      response = await getRequest(endpoint: endpoint, query: {"user_id": id});
+      print('no error');
+    } catch (e) {
+      response = ApiResponse(error: true, errorMessage: e.toString());
+    }
+
+    return response;
+  }
+
+  Future<ApiResponse> followUserMethod(
       {String endpoint, Map<String, dynamic> data}) async {
     ApiResponse response;
     try {
-      response = await patchRequest(endpoint, data);
+      response = await postRequest(endpoint, data);
       print('no error');
     } catch (e) {
       response = ApiResponse(error: true, errorMessage: e.toString());
     }
+
     return response;
   }
-
-  Future<ApiResponse> deleteWebsiteMethod({String endpoint, String id}) async {
-    ApiResponse response;
-    try {
-      response = await deleteRequest(endpoint: endpoint, id: id);
-      print('no error');
-    } catch (e) {
-      response = ApiResponse(error: true, errorMessage: e.toString());
-    }
-    return response;
-  }
-
-  // Website ViewModel
-
 }

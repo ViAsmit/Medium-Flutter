@@ -42,9 +42,16 @@ class _ArticleScreenState extends State<ArticleScreen> {
                         CircleAvatar(
                             backgroundColor: Colors.black, radius: 10.0),
                         SizedBox(width: 10.0),
-                        Text(
-                          'Asmit Vimal',
-                          style: Theme.of(context).textTheme.subtitle,
+                        GestureDetector(
+                          onTap: () {
+                            print(widget.article.author.id);
+                            Navigator.of(context).pushNamed("/profile",
+                                arguments: widget.article.author.id);
+                          },
+                          child: Text(
+                            widget.article.author.name,
+                            style: Theme.of(context).textTheme.subtitle,
+                          ),
                         ),
                         SizedBox(width: 10.0),
                         Text(
@@ -57,7 +64,12 @@ class _ArticleScreenState extends State<ArticleScreen> {
                     Container(
                       width: double.infinity,
                       height: app.App(context).appHeight(35),
-                      color: Colors.grey,
+                      color: (widget.article.featureImg != "")
+                          ? Colors.transparent
+                          : Colors.grey,
+                      child: (widget.article.featureImg != "")
+                          ? Image.network(widget.article.featureImg)
+                          : null,
                     ),
                     SizedBox(height: 25.0),
                     Text(

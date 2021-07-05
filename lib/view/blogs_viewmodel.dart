@@ -10,6 +10,7 @@ class BlogsViewModel extends BaseModel {
   List<Article> articles = [];
 
   void getArticles(BuildContext context) async {
+    articles = [];
     final response = await _apiService.getArticlesMethod(endpoint: "/posts");
     if (!response.error) {
       setState(ViewState.Idle);

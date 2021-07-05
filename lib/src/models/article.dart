@@ -17,6 +17,7 @@ class Article {
     this.description,
     this.featureImg,
     this.author,
+    this.date,
     this.comments,
     this.v,
   });
@@ -28,6 +29,7 @@ class Article {
   String description;
   String featureImg;
   Author author;
+  DateTime date;
   List<Comment> comments;
   int v;
 
@@ -39,6 +41,7 @@ class Article {
         description: json["description"],
         featureImg: json["feature_img"],
         author: Author.fromJson(json["author"]),
+        date: json["date"] == null ? null : DateTime.parse(json["date"]),
         comments: List<Comment>.from(
             json["comments"].map((x) => Comment.fromJson(x))),
         v: json["__v"],
@@ -52,6 +55,7 @@ class Article {
         "description": description,
         "feature_img": featureImg,
         "author": author.toJson(),
+        "date": date == null ? null : date.toIso8601String(),
         "comments": List<dynamic>.from(comments.map((x) => x.toJson())),
         "__v": v,
       };

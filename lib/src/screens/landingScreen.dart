@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:medium_flutter/provider/base_view.dart';
-import 'package:medium_flutter/services/navigation_service.dart';
-import 'package:medium_flutter/src/models/article.dart';
+import 'package:medium_flutter/src/widgets/BlogCard.dart';
 import 'package:medium_flutter/src/widgets/DrawerWidget.dart';
 import 'package:medium_flutter/view/blogs_viewmodel.dart';
+import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 class LandingScreen extends StatefulWidget {
   @override
@@ -12,6 +12,8 @@ class LandingScreen extends StatefulWidget {
 
 class _LandingScreenState extends State<LandingScreen> {
   final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
+  RefreshController _refreshController =
+      RefreshController(initialRefresh: false);
   @override
   Widget build(BuildContext context) {
     return BaseView<BlogsViewModel>(
@@ -39,114 +41,25 @@ class _LandingScreenState extends State<LandingScreen> {
         ),
         body: Container(
           padding: EdgeInsets.symmetric(horizontal: 15.0, vertical: 20.0),
-          child: ListView.builder(
-            itemCount: model.articles.length,
-            itemBuilder: (context, idx) {
-              return BlogCard(
-                article: model.articles[idx],
-              );
+          child: SmartRefresher(
+            enablePullDown: true,
+            header: WaterDropMaterialHeader(),
+            controller: _refreshController,
+            onRefresh: () {
+              model.getArticles(context);
+              _refreshController.refreshCompleted();
             },
+            child: ListView.builder(
+              itemCount: model.articles.length,
+              itemBuilder: (context, idx) {
+                return BlogCard(
+                  article: model.articles[idx],
+                );
+              },
+            ),
           ),
         ),
       ),
-    );
-  }
-}
-
-class BlogCard extends StatefulWidget {
-  final Article article;
-  BlogCard({this.article});
-  @override
-  _BlogCardState createState() => _BlogCardState();
-}
-
-class _BlogCardState extends State<BlogCard> {
-  final List<String> options = [
-    'Dismiss this story',
-    'Mute this author',
-    'Mute this piblication'
-  ];
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        SizedBox(height: 5.0),
-        Text(
-          'BASED ON YOUR READING HISTORY',
-          style: Theme.of(context).textTheme.caption.merge(
-              TextStyle(color: Theme.of(context).hintColor.withOpacity(0.5))),
-        ),
-        SizedBox(height: 20.0),
-        GestureDetector(
-          onTap: () {
-            Navigator.of(context)
-                .pushNamed("/article", arguments: widget.article);
-          },
-          child: Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Expanded(
-                child: Container(
-                  height: 100,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        widget.article.title,
-                        style: Theme.of(context).textTheme.display1,
-                        softWrap: true,
-                      ),
-                      SizedBox(height: 5.0),
-                      Text(
-                        widget.article.text,
-                        style: Theme.of(context).textTheme.subtitle1,
-                        softWrap: true,
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-              Image.asset('assets/images/logo.png',
-                  height: 100.0, width: 100.0),
-            ],
-          ),
-        ),
-        SizedBox(height: 10.0),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  'Asmit in Towards Data Science',
-                  style: Theme.of(context).textTheme.subtitle,
-                ),
-                Text(
-                  '23 May 2020 - 5 min read ☆ ',
-                  style: Theme.of(context).textTheme.caption,
-                )
-              ],
-            ),
-            Icon(Icons.bookmark_outline),
-            PopupMenuButton(
-              icon: Icon(Icons.more_vert),
-              itemBuilder: (BuildContext context) {
-                return options.map((item) {
-                  return PopupMenuItem(
-                    value: item,
-                    child:
-                        Text(item, style: Theme.of(context).textTheme.caption),
-                  );
-                }).toList();
-              },
-            ),
-          ],
-        ),
-        Divider(thickness: 1.0),
-      ],
     );
   }
 }
